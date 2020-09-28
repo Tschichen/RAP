@@ -1,0 +1,48 @@
+{
+    "WORKFLOWS": "CMSEARCH",
+    "BINS": "snakes/scripts",
+    "REFERENCE": "GENOME",
+    "MAXTHREADS": "20",
+    "GENOME": {
+        "ASM_Wormbase": "PRJEA36577" # Add reference Genome of species, where cmsearch should be done
+    }
+    "NAME": {
+        "WORMBASE": {
+            "190808": {
+                "star_multi": ""
+            }
+        }
+    },
+    "SOURCE": {
+        "WORMBASE": {
+            "190808": {
+                "star_multi": "ASM_Wormbase"
+            }
+        }
+    },
+    "SAMPLES": {
+        "CMFILES": {
+            "all": {
+                "all": [
+                # list names of cm files here
+                ]
+            }
+        }
+    },
+    "CMSEARCH": { 
+        "WORMBASE": {
+            "190808": {
+                "star_multi": {
+                    "ENV": "infernal",
+                    "BIN": "cmsearch",
+                    "GENOME": "ASM23792v2.fa.gz",
+                    "OPTIONS": [
+                        {
+                            "--cpu": "8"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
