@@ -1,2 +1,2 @@
 # RAP
-Ribo-seq Analysis Pipeline
+Ribozyme-seq Analysis Pipeline
