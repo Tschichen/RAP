@@ -1,5 +1,3 @@
-EXTRACT
-
 rule UMITOOLS_EXTRACT:
     input:  read1 = "FASTQ/{file}_r1.fastq.gz",
             read2 = "FASTQ/{file}_r2.fastq.gz"

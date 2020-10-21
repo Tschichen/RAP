@@ -1,7 +1,5 @@
 # INPUT for Piranha: (from Workflow peaks.smk) output from step: rule PreprocessPeaks needed!
 # Probably it will be the best only to replace rule FindPeaks with Piranha rules
-
-
 wildcard_constraints:
     type="sorted|unique"
 

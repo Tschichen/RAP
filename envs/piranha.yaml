@@ -1,0 +1,14 @@
+name: piranha
+channels:
+  - bioconda
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=main
+  - bamtools=2.5.1=he513fc3_6
+  - gsl=2.4=h14c3975_4
+  - libgcc-ng=9.1.0=hdf63c60_0
+  - libstdcxx-ng=9.1.0=hdf63c60_0
+  - piranha=1.2.1=h2c4b914_7
+  - zlib=1.2.11=h7b6447c_3
+prefix: /homes/brauerei/christiane/miniconda3/envs/piranha
+
