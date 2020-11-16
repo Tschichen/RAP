@@ -25,5 +25,5 @@ plot_ribo_count <- function(data, name, path){
       ggsave(path, x, width = 13, height = 10)
 	
 	}
-	
+
 plot_ribo_count(count_data, name, path)

@@ -1,16 +1,31 @@
+#/usr/bin/env python3
+# Ribo_intersect_analysis.py ---
+#
+# Filename: Ribo_intersect_analysis.py
+# Description:
+# Author: Christiane Gaertner
+# Created: Mon Nov 16 11:43:25 2020 (+0100)
+# Version: 0.1
+# Package-Requires: argparse, os, pathlib, pandas
+# Last-Updated: Mon Nov 16 12:20:10 2020 (+0100)
+#           By: Christiane Gaertner
+#     Update #: 1
+
+# CODE
+# IMPORTS
 import argparse
 import pandas as pd
 import os
 from pathlib import Path
 
-
+# Returns Path of input directory
 def dir_path(string):
     if os.path.isdir(string):
         return string
     else:
         raise NotADirectoryError(string)
 
-
+# Returns Path of output directory
 def dir_outpath(string):
     if os.path.isdir(string):
         return string
@@ -20,6 +35,7 @@ def dir_outpath(string):
     Path(dir_path).mkdir()
     return string
 
+# Function that counts reads
 def count_ribo(file):
     input = file.readlines()
     count_ribos = {}
@@ -52,7 +68,7 @@ def count_ribo(file):
     
     return new_names_dict
 
-
+# MAIN
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="count ribos in annotationsgit ")
     parser.add_argument('-i', '--indir', type=dir_path, required=True, help="directory, where input files are stored")
@@ -81,3 +97,5 @@ if __name__ == "__main__":
             filename = out_dir + "/" + "ribo_peaks" + input_name + ".csv"
             Path(filename).touch()
             ribo_count_df.to_csv(filename, sep="\t", header=True)
+
+# Ribo_intersect_analysis.py ends here

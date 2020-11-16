@@ -24,5 +24,5 @@ plot_ribo_eval <- function(data, name, path){
       ggsave(path, x, width = 13, height = 10)
 	
 	}
-	
+
 plot_ribo_eval(eval_data, name, path)

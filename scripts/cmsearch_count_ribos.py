@@ -1,10 +1,26 @@
+#/usr/bin/env python3
+# cmsarch_count_ribos.py ---
+#
+# Filename: cmsarch_count_ribos.py 
+# Description:
+# Author: Christiane Gaertner
+# Created: Mon Nov 16 12:43:10 2020 (+0100)
+# Version: 0.1
+# Package-Requires: argparse, os, pathlib, numpy, pandas
+# Last-Updated: Mon Nov 16 12:43:10 2020 (+0100)
+#           By: Christiane Gaertner
+#     Update #: 1
+
+# CODE
+
+# IMPORTS
 import argparse
 import os
 from pathlib import Path
 import numpy as np
 import pandas as pd
 
-
+# Counting of hitsfor every hit under threshold
 def count_ribozymes(input_file, threshold):
     input_lines = input_file.readlines()
     ribo_dict = {}
@@ -20,8 +36,8 @@ def count_ribozymes(input_file, threshold):
                 ribo_dict[ribo] = 1
                 
     return ribo_dict
-    
 
+# Calculation of lengths for every hit under threshold
 def length_calculation(input_file, threshold):
     length_dict = {}
     file = input_file.readlines()
@@ -37,7 +53,9 @@ def length_calculation(input_file, threshold):
                 length_dict[ribo] = length_array
 
     return length_dict
-    
+
+
+# Calculation of e-values for every hit under threshold
 def eval_calculation(input_file, threshold):
     eval_dict = {}
     file = input_file.readlines()
@@ -54,14 +72,14 @@ def eval_calculation(input_file, threshold):
 
     return eval_dict
 
-
+# Returns path of input directory
 def dir_path(string):
     if os.path.isdir(string):
         return string
     else:
         raise NotADirectoryError(string)
 
-
+# Returns Path of output directory
 def dir_outpath(string):
     if os.path.isdir(string):
         return string
@@ -71,7 +89,7 @@ def dir_outpath(string):
     Path(dir_path).mkdir()
     return string
 
-
+# MAIN
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="calculation of statistics out of cmsearch results")
     parser.add_argument('-i', '--indir', type=dir_path, required=True, help="directory, where input files are stored")
@@ -140,3 +158,5 @@ if __name__ == "__main__":
                             s = str(key) + "\t" + str(eval)
                             out_file.write(s)
                             out_file.write("\n")
+
+# cmsearch_count_ribos.py ends here
