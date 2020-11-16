@@ -7,7 +7,7 @@ The bash scripts provided in this repository are used to evaluate the output of 
 
 To analyze annotation sites of ribozymes in a species, run the following script:
 
-'sh cmsearch_analysis.sh PATHTOPEAKFILEDIRECTORY E-VALUETHRESHOLDFORHITS'
+`sh cmsearch_analysis.sh PATHTOPEAKFILEDIRECTORY E-VALUETHRESHOLDFORHITS`
 
 Count, length, and e-values of annotation sites under the given threshold are saved in several tab-separated csv files. Additionally, visualisations are given in the plots directory. 
 
@@ -15,6 +15,6 @@ Count, length, and e-values of annotation sites under the given threshold are sa
 
 To analyze peaks representing ribozymes, run the following script:
 
-'sh peak_analysis.sh PATHTODIRECTORYWITHPEAKFILES PATHTORIBOZYMEANNOTATION'
+`sh peak_analysis.sh PATHTODIRECTORYWITHPEAKFILES PATHTORIBOZYMEANNOTATION`
 
 Count of ribozyme peaks are saved in several tab-separated csv files. Additionally, visualisations are given in the plots directory. 
