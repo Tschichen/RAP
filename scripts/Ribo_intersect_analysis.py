@@ -20,7 +20,7 @@ def dir_outpath(string):
     Path(dir_path).mkdir()
     return string
 
-def count_ribo (file):
+def count_ribo(file):
     input = file.readlines()
     count_ribos = {}
 
@@ -34,10 +34,23 @@ def count_ribo (file):
             count_ribos[ribo] = count
         else:
             count_ribos[ribo] = 1
-
-    print(count_ribos)
-
-    return count_ribos
+    new_names_dict = {}
+    for entry in count_ribos.keys():
+        if "Hammer" in str(entry) or "hammer" in str(entry):
+            ribos = str(entry).split("|")
+            new_key = ""
+            for ribo in ribos:
+                ribo_new = ribo.replace("Hammerhead", "HH")
+                ribo_new = ribo_new.replace("hammerhead", "HH")
+                new_key += ribo_new
+                new_key += " "
+            new_names_dict[new_key] = count_ribos[entry]
+        else:
+            new_names_dict[entry] = count_ribos[entry]
+    
+    print(new_names_dict)
+    
+    return new_names_dict
 
 
 if __name__ == "__main__":

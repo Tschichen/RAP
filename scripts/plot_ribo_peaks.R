@@ -22,7 +22,7 @@ plot_ribo_count <- function(data, name){
       labs(title=name, x='ribozyme', y='count') + geom_text(aes(label=count), position=position_dodge(width=1), hjust=-0.2, size=3) +
       coord_flip()
       
-      ggsave(path, x, width = 13, height = 10)
+      ggsave(path, x, width = 15, height = 8)
 	
 	}
 	
