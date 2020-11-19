@@ -12,8 +12,9 @@ for i in *;
 do
 if [[ $i =~ "_peak_sorted" ]]
 then
-bedtools intersect -a $i -b $anno_dir -wa -wb > ../intersect_ribo_anno/${i}_intersect_ribo.bed; done
+bedtools intersect -a $i -b $anno_dir -wa -wb > ../intersect_ribo_anno/${i}_intersect_ribo.bed
 fi
+done
 cd ..
 python3 scripts/Ribo_intersect_analysis.py -i intersect_ribo_anno -o ribo_peaks_csv
 cd ribo_peaks_csv
