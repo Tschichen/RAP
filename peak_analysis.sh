@@ -1,14 +1,10 @@
 #!/bin/sh
-# should be executed in the RAP directory after cloning it. Directory with peak_files should be linked to this directory, too. 
-# $1 = directory with files out of peak finding.
-# $2 = path to ribozyme annotation
-var1=$1;var2=$2
-peak_dir=$var1
-peak_files="/*"
-peak_path=$peak_dir$peak_files
-anno_path=$var2
+# should be executed in the RAP directory after cloning it. Directory with peak_files should be linked to this directory, too, named peaks
+# $1 = path to ribozyme annotation
+anno_path=$1
 mkdir intersect_ribo_anno && mkdir ribo_peaks_csv
-for i in $peak_path
+PEAK_FILES=peaks/*
+for i in PEAK_FILES
 do
 	name=${i##*/}
 	bedtools intersect -a $i -b $anno_path -wa -wb > intersect_ribo_anno/${name}_intersect_ribo.bed
