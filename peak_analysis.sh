@@ -2,7 +2,9 @@
 # should be executed in the RAP directory after cloning it. Directory with peak_files should be linked to this directory, too, named peaks
 # $1 = path to ribozyme annotation
 anno_path=$1
-mkdir intersect_ribo_anno && mkdir ribo_peaks_csv && mkdir plots
+mkdir intersect_ribo_anno
+mkdir ribo_peaks_csv
+mkdir plots
 cd peaks
 anno="../"
 anno_dir=$anno$anno_path
