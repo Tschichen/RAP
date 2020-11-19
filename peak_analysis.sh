@@ -6,10 +6,7 @@ mkdir intersect_ribo_anno && mkdir ribo_peaks_csv
 cd peaks
 anno="../"
 anno_dir=$anno$anno_path
-for i in *_peak_*
-do
-	bedtools intersect -a $i -b $anno_dir -wa -wb > ../intersect_ribo_anno/${i}_intersect_ribo.bed
-done
+for i in *; do bedtools intersect -a $i -b $anno_dir -wa -wb > ../intersect_ribo_anno/${i}_intersect_ribo.bed; done
 cd ..
 python3 scripts/Ribo_intersect_analysis.py -i intersect_ribo_anno -o ribo_peaks_csv
 FILES=ribo_peaks_csv/*
