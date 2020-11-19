@@ -8,7 +8,11 @@ peak_files="/*"
 peak_path=$peak_dir$peak_files
 anno_path=$var2
 mkdir intersect_ribo_anno && mkdir ribo_peaks_csv
-for i in $peak_path; do bedtools intersect -a $i -b $anno_path -wa -wb > intersect_ribo_anno/${i}_intersect_ribo.bed; done
+for i in $peak_path
+do
+	name=${i##*/}
+	bedtools intersect -a $i -b $anno_path -wa -wb > intersect_ribo_anno/${name}_intersect_ribo.bed
+done
 python3 scripts/Ribo_intersect_analysis.py -i intersect_ribo_anno -o ribo_peaks_csv
 FILES=ribo_peaks_csv/*
 for f in $FILES
