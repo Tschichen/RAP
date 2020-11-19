@@ -3,11 +3,10 @@
 # $1 = path to ribozyme annotation
 anno_path=$1
 mkdir intersect_ribo_anno && mkdir ribo_peaks_csv
-PEAK_FILES=peaks/*
-for i in PEAK_FILES
+cd peaks
+for i in *_peaks_*
 do
-	name=${i##*/}
-	bedtools intersect -a $i -b $anno_path -wa -wb > intersect_ribo_anno/${name}_intersect_ribo.bed
+	bedtools intersect -a $i -b $anno_path -wa -wb > intersect_ribo_anno/${i}_intersect_ribo.bed
 done
 python3 scripts/Ribo_intersect_analysis.py -i intersect_ribo_anno -o ribo_peaks_csv
 FILES=ribo_peaks_csv/*
