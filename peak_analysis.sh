@@ -4,7 +4,7 @@
 anno_path=$1
 mkdir intersect_ribo_anno && mkdir ribo_peaks_csv
 cd peaks
-for i in *_peaks_*
+for i in *_peak_*
 do
 	bedtools intersect -a $i -b $anno_path -wa -wb > ../intersect_ribo_anno/${i}_intersect_ribo.bed
 done
