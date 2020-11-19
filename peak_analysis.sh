@@ -4,7 +4,7 @@
 # $2 = path to ribozyme annotation
 var1=$1;var2=$2
 peak_dir=$var1
-peak_files="/*_peaks*"
+peak_files="/*"
 peak_path=$peak_dir$peak_files
 anno_path=$var2
 mkdir intersect_ribo_anno && mkdir ribo_peaks_csv
