@@ -14,8 +14,9 @@ Count, length, and e-values of annotation sites under the given threshold are sa
 
 ## Quantification of ribozyme peaks from Ribozeq experiments
 
-To analyze peaks representing ribozymes, run the following script:
+To analyze peaks representing ribozymes, link peak files from peak finding to the directory "peaks".
+Then run the following script:
 
-`sh peak_analysis.sh PATHTODIRECTORYWITHPEAKFILES PATHTORIBOZYMEANNOTATION`
+`sh peak_analysis.sh PATHTORIBOZYMEANNOTATION`
 
 Counts of ribozyme peaks are saved in several tab-separated csv files. Additionally, visualisations are given in the plots directory. 
