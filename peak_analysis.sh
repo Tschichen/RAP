@@ -12,7 +12,7 @@ for i in *;
 do
 if [[ $i =~ "_peak_sorted" ]]
 then
-bedtools intersect -a $i -b $anno_dir -wa -wb > ../intersect_ribo_anno/${i}_intersect_ribo.bed
+bedtools intersect -a $i -b $anno_dir -wa -wb -s > ../intersect_ribo_anno/${i}_intersect_ribo.bed
 fi
 done
 cd ..
@@ -22,7 +22,7 @@ for f in *
 do
 	name=${f##*/}
 	string1="../plots/"
-	string2="_peaks.pdf"
+	string2="_peaks"
 	plot_name=$string1$name$string2
 	Rscript ../scripts/plot_ribo_peaks.R $f $name $plot_name
 done

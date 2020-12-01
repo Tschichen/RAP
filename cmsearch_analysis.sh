@@ -7,7 +7,6 @@ python3 scripts/cmsearch_count_ribos.py -i $var1 -o cmsearch_ribo_evals -t $var2
 mkdir plots
 FILES1=cmsearch_ribo_counts/*
 for f in $FILES1
-# TODO: convert f to string for length calculation!
 do
 	name=${f##*/}
 	string1="plots/"
