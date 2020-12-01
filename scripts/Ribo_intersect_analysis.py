@@ -1,31 +1,16 @@
-#/usr/bin/env python3
-# Ribo_intersect_analysis.py ---
-#
-# Filename: Ribo_intersect_analysis.py
-# Description:
-# Author: Christiane Gaertner
-# Created: Mon Nov 16 11:43:25 2020 (+0100)
-# Version: 0.1
-# Package-Requires: argparse, os, pathlib, pandas
-# Last-Updated: Mon Nov 16 12:20:10 2020 (+0100)
-#           By: Christiane Gaertner
-#     Update #: 1
-
-# CODE
-# IMPORTS
 import argparse
-import pandas as pd
 import os
+import pandas as pd
 from pathlib import Path
 
-# Returns Path of input directory
+
 def dir_path(string):
     if os.path.isdir(string):
         return string
     else:
         raise NotADirectoryError(string)
 
-# Returns Path of output directory
+
 def dir_outpath(string):
     if os.path.isdir(string):
         return string
@@ -35,7 +20,7 @@ def dir_outpath(string):
     Path(dir_path).mkdir()
     return string
 
-# Function that counts reads
+
 def count_ribo(file):
     input = file.readlines()
     count_ribos = {}
@@ -50,25 +35,39 @@ def count_ribo(file):
             count_ribos[ribo] = count
         else:
             count_ribos[ribo] = 1
-    new_names_dict = {}
-    for entry in count_ribos.keys():
-        if "Hammer" in str(entry) or "hammer" in str(entry):
-            ribos = str(entry).split("|")
-            new_key = ""
-            for ribo in ribos:
-                ribo_new = ribo.replace("Hammerhead", "HH")
-                ribo_new = ribo_new.replace("hammerhead", "HH")
-                new_key += ribo_new
-                new_key += " "
-            new_names_dict[new_key] = count_ribos[entry]
-        else:
-            new_names_dict[entry] = count_ribos[entry]
-    
-    print(new_names_dict)
-    
-    return new_names_dict
 
-# MAIN
+    print(count_ribos)
+
+    return count_ribos
+
+
+def quantify_ribo(file):
+    input = file.readlines()
+    cluster_ribos = {}
+
+    for line in input:
+        line = str(line).split("\t")
+        ribo = line[10]
+        length = abs(int(line[2])-int(line[1]))
+        height = float(line[4])
+
+        if ribo in cluster_ribos.keys():
+            lengths_heights = cluster_ribos[ribo]
+            lengths = lengths_heights[0]
+            heights = lengths_heights[1]
+            lengths.append(length)
+            heights.append(height)
+            cluster_ribos[ribo] = [lengths, heights]
+        else:
+            lengths = [length]
+            heights = [height]
+            cluster_ribos[ribo] = [lengths, heights]
+
+    print(cluster_ribos)
+
+    return cluster_ribos
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="count ribos in annotationsgit ")
     parser.add_argument('-i', '--indir', type=dir_path, required=True, help="directory, where input files are stored")
@@ -91,11 +90,29 @@ if __name__ == "__main__":
         input_name = str(file).split("/")[-1][:-5]
         with open(file, "r") as handle:
             ribo_count_dict = count_ribo(handle)
-            s = pd.Series(ribo_count_dict, name = 'count')
-            s.index.name = 'ribozyme'
-            ribo_count_df = pd.DataFrame(s)
-            filename = out_dir + "/" + "ribo_peaks" + input_name + ".csv"
-            Path(filename).touch()
+
+            ribo_count_df = pd.DataFrame.from_records([ribo_count_dict])
+
+            filename = out_dir + "/" + "ribos_peak_" + input_name + ".csv"
+
             ribo_count_df.to_csv(filename, sep="\t", header=True)
 
-# Ribo_intersect_analysis.py ends here
+        with open(file, "r") as handle2:
+
+            ribo_cluster_dict = quantify_ribo(handle2)
+
+            filename_quanti = out_dir + "/" + "ribo_peaks_quantify_count" + input_name + ".csv"
+            Path(filename_quanti).touch()
+            with open(filename_quanti, "w") as out_file:
+                header = "hit\tlength\theight\n"
+                out_file.write(header)
+                for category in ribo_cluster_dict.keys():
+                    hit_name = str(category)
+                    arrays = ribo_cluster_dict[hit_name]
+                    length_array = arrays[0]
+                    height_array = arrays[1]
+                    for i in range(len(length_array)):
+                        length = str(length_array[i])
+                        height = str(height_array[i])
+                        new_line = hit_name + "\t" + length + "\t" + height + "\n"
+                        out_file.write(new_line)
