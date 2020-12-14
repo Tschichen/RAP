@@ -82,7 +82,7 @@ if __name__ == "__main__":
     if args.notribo:
         position = 9
     else:
-        position = 3
+        position = 10
 
     # r=root, d=directories, f = files
     for r, d, f in os.walk(file_dir):
