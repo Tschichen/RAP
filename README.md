@@ -2,11 +2,11 @@
 Ribozeq Analysis Pipeline
 latest version: 0.1 (16.11.2020)
 
-The bash scripts provided in this repository are used to evaluate the output of the [NextSnakes pipeline](https://github.com/jfallmann/NextSnakes). The necessary configurations for the evaluation of the Ribozeq data are explained in detail there. 
+The bash scripts provided in this repository can be used to evaluate the output of the [NextSnakes pipeline](https://github.com/jfallmann/NextSnakes). The necessary configurations to process the Ribozeq data are explained in detail there. 
 
 ## Quantification of ribozyme annotation sites in species' genomes
 
-To analyze annotation sites of ribozymes in a species, run the following script:
+After running cmsearch to find ribozyme annotation sites (included in the NextSnakes pipelines), cmsearch output files can be analyzed with the following script. It points out results for single ribozyme types. 
 
 `sh cmsearch_analysis.sh PATHTORIBOBEDFILEDIRECTORY E-VALUETHRESHOLDFORHITS`
 
