@@ -2,6 +2,7 @@ import argparse
 import os
 import pandas as pd
 from pathlib import Path
+import numpy as np
 
 
 def dir_path(string):
@@ -29,8 +30,7 @@ def count_ribo(file, position):
         line = str(line).split("\t")
         ribo = line[position]
         if "Hammerhead" in ribo or "hammerhead" in ribo:
-            ribo = ribo.replace("Hammerhead", "HH")
-            ribo = ribo.replace("hammerhead", "HH")
+            ribo = "HH"
 
         if ribo in count_ribos.keys():
             count = count_ribos[ribo]
@@ -54,8 +54,7 @@ def quantify_ribo(file, position):
         length = abs(int(line[2])-int(line[1]))
         height = float(line[4])
         if "Hammerhead" in ribo or "hammerhead" in ribo:
-            ribo = ribo.replace("Hammerhead", "HH")
-            ribo = ribo.replace("hammerhead", "HH")
+            ribo = "HH"
 
         if ribo in cluster_ribos.keys():
             lengths_heights = cluster_ribos[ribo]
@@ -70,6 +69,24 @@ def quantify_ribo(file, position):
             cluster_ribos[ribo] = [lengths, heights]
 
     return cluster_ribos
+
+
+def find_mean_peak_height_to_length(cluster_ribos_quantify):
+    mean_dict = {}
+    for ribo in cluster_ribos_quantify.keys():
+        ribo_name = str(ribo)
+        ribo_arrays = cluster_ribos_quantify[ribo_name]
+        length_array = ribo_arrays[0]
+        height_array = ribo_arrays[1]
+        means = []
+        for i in range(len(height_array)):
+            relative_value = float(height_array[i]) / float(length_array[i])
+            means.append(relative_value)
+        value = np.mean(means)
+        median = np.median(means)
+        mean_dict[ribo_name] = [value, median]
+
+    return mean_dict
 
 
 if __name__ == "__main__":
@@ -131,3 +148,18 @@ if __name__ == "__main__":
                         height = str(height_array[i])
                         new_line = hit_name + "\t" + length + "\t" + height + "\n"
                         out_file.write(new_line)
+                        
+            mean_dict = find_mean_peak_height_to_length(ribo_cluster_dict)
+
+            filename_means = out_dir + "/" + "ribo_peaks_mean" + input_name + ".csv"
+            Path(filename_means).touch()
+            with open(filename_means, "w") as out_file:
+                header = "ribo\tmean_height\tmedian_height\n"
+                out_file.write(header)
+                for category in mean_dict.keys():
+                    hit_name = str(category)
+                    mean_median = mean_dict[hit_name]
+                    mean = mean_median[0]
+                    median = mean_median[1]
+                    new_line = hit_name + "\t" + str(mean) + "\t" + str(median) + "\n"
+                    out_file.write(new_line)
