@@ -16,7 +16,7 @@ bedtools intersect -a $i -b $anno_dir -wa -wb -s > ../intersect_ribo_anno/${i}_i
 fi
 done
 cd ..
-python3 scripts/Ribo_intersect_analysis.py -i intersect_ribo_anno -o ribo_peaks_csv -n
+python3 scripts/Ribo_intersect_analysis_cluster.py -i intersect_ribo_anno -o ribo_peaks_csv -p
 cd ribo_peaks_csv
 for f in *
 do
