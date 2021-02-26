@@ -10,13 +10,13 @@ anno="../"
 anno_dir=$anno$anno_path
 for i in *; 
 do
-if [[ $i =~ "_peak_sorted" ]]
+if [[ $i =~ "peak_sorted" ]]
 then
 bedtools intersect -a $i -b $anno_dir -wa -wb -s > ../intersect_ribo_anno/${i}_intersect_ribo.bed
 fi
 done
 cd ..
-python3 scripts/Ribo_intersect_analysis.py -i intersect_ribo_anno -o ribo_peaks_csv
+python3 scripts/Ribo_intersect_analysis_cluster.py -i intersect_ribo_anno -o ribo_peaks_csv
 cd ribo_peaks_csv
 for f in *
 do
