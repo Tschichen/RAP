@@ -94,6 +94,7 @@ if __name__ == "__main__":
     parser.add_argument('-i', '--indir', type=dir_path, required=True, help="directory, where input files are stored")
     parser.add_argument('-o', '--outdir', type=dir_outpath, required=True, help="directory for output files")
     parser.add_argument('-n', '--notribo', action='store_true', help="if intersections with off anno are tested")
+    parser.add_argument('-p', '--peak_JF', action='store_true', help="if peak calling with peakf JF")
     args = parser.parse_args()
 
     file_dir = os.path.abspath(args.indir)
@@ -104,6 +105,8 @@ if __name__ == "__main__":
 
     if args.notribo:
         position = 9
+    elif args.peak_JF:
+        position = 12
     else:
         position = 10
 
