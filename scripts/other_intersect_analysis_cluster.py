@@ -2,6 +2,7 @@ import argparse
 import os
 import pandas as pd
 from pathlib import Path
+import numpy as np
 
 
 def dir_path(string):
@@ -68,6 +69,28 @@ def quantify_other(file, position):
     return cluster_others
 
 
+def find_mean_peak_height_to_length(cluster_others_quantify):
+    mean_dict = {}
+    for other in cluster_others_quantify.keys():
+        other_name = str(other)
+        other_arrays = cluster_others_quantify[other_name]
+        length_array = other_arrays[0]
+        height_array = other_arrays[1]
+        means = []
+        widths = []
+        for i in range(len(height_array)):
+            relative_value = float(height_array[i]) / float(length_array[i])
+            widths.append(length_array[i])
+            means.append(relative_value)
+        value = np.mean(means)
+        median = np.median(means)
+        mean_length = np.mean(widths)
+        median_length = np.median(widths)
+        mean_dict[other_name] = [value, median, mean_length, median_length]
+
+    return mean_dict
+    
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="count other in peaks in intersection with off. anno")
     parser.add_argument('-i', '--indir', type=dir_path, required=True, help="directory, where input files are stored")
@@ -129,3 +152,19 @@ if __name__ == "__main__":
                             height = str(height_array[i])
                             new_line = hit_name + "\t" + length + "\t" + height + "\n"
                             out_file.write(new_line)
+            mean_dict = find_mean_peak_height_to_length(other_cluster_dict)
+
+            filename_means = out_dir + "/" + "other_peaks_mean" + input_name + ".csv"
+            Path(filename_means).touch()
+            with open(filename_means, "w") as out_file:
+                header = "hit\tmean_height\tmedian_height\tmean_width\tmedian_width\n"
+                out_file.write(header)
+                for category in mean_dict.keys():
+                    hit_name = str(category)
+                    mean_median = mean_dict[hit_name]
+                    mean = mean_median[0]
+                    median = mean_median[1]
+                    mean_length = mean_median[2]
+                    median_length = mean_median[3]
+                    new_line = hit_name + "\t" + str(mean) + "\t" + str(median) + "\t" + str(mean_length) + "\t" + str(median_length) + "\n"
+                    out_file.write(new_line)

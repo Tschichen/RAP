@@ -79,12 +79,16 @@ def find_mean_peak_height_to_length(cluster_ribos_quantify):
         length_array = ribo_arrays[0]
         height_array = ribo_arrays[1]
         means = []
+        widths = []
         for i in range(len(height_array)):
             relative_value = float(height_array[i]) / float(length_array[i])
             means.append(relative_value)
+            widths.append(length_array[i])
         value = np.mean(means)
         median = np.median(means)
-        mean_dict[ribo_name] = [value, median]
+        mean_length = np.mean(widths)
+        median_length = np.median(widths)
+        mean_dict[ribo_name] = [value, median, mean_length, median_length]
 
     return mean_dict
 
@@ -157,12 +161,14 @@ if __name__ == "__main__":
             filename_means = out_dir + "/" + "ribo_peaks_mean" + input_name + ".csv"
             Path(filename_means).touch()
             with open(filename_means, "w") as out_file:
-                header = "ribo\tmean_height\tmedian_height\n"
+                header = "ribo\tmean_height\tmedian_height\tmean_width\tmedian_width\n"
                 out_file.write(header)
                 for category in mean_dict.keys():
                     hit_name = str(category)
                     mean_median = mean_dict[hit_name]
                     mean = mean_median[0]
                     median = mean_median[1]
-                    new_line = hit_name + "\t" + str(mean) + "\t" + str(median) + "\n"
+                    mean_length = mean_median[2]
+                    median_length = mean_median[3]
+                    new_line = hit_name + "\t" + str(mean) + "\t" + str(median) + "\t" + str(mean_length) + "\t" + str(median_length) + "\n"
                     out_file.write(new_line)
