@@ -1,5 +1,4 @@
-# RAP
-Ribozeq Analysis Pipeline
+# SCALPEL (SCRibo-seq analysis pipeline)
 latest version: 0.1 (16.11.2020)
 
 The bash scripts provided in this repository can be used to evaluate the output of the [NextSnakes pipeline](https://github.com/jfallmann/NextSnakes). The necessary configurations to process the Ribozeq data are explained in detail there. 
