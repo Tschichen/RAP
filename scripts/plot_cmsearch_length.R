@@ -1,4 +1,15 @@
 #!/usr/bin/env Rscript
+
+# Filename: plot_cmsearch_length.R
+# Description: Generates box plots that show distributions of lengths of hits from cmsearch for each ribo type / CM.
+# Author: Christiane Gaertner
+# Version: 0.1
+# Package-Requires: ggplot2
+
+
+# CODE
+
+# IMPORTS
 library("ggplot2")
 
 options(echo=TRUE)

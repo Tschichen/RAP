@@ -1,3 +1,16 @@
+#!/usr/bin/env python3
+
+"""
+CONTENTS      : Analyse ribozyme peaks from SCRibo-seq experiments in species were clustering of ribozyme sequences is necessary (e.g. S. mansoni) 
+
+DESCRIPTION   : Peaks on the clusters are counted, heights and widths of the peaks, and their means and medians were calculated. Results were generated as CSV files.
+
+version: 0.1
+
+@author: Christiane Gaertner
+"""
+
+
 import argparse
 import os
 import pandas as pd
@@ -98,7 +111,6 @@ if __name__ == "__main__":
     parser.add_argument('-i', '--indir', type=dir_path, required=True, help="directory, where input files are stored")
     parser.add_argument('-o', '--outdir', type=dir_outpath, required=True, help="directory for output files")
     parser.add_argument('-n', '--notribo', action='store_true', help="if intersections with off anno are tested")
-    parser.add_argument('-p', '--peak_JF', action='store_true', help="if peak calling with peakf JF")
     args = parser.parse_args()
 
     file_dir = os.path.abspath(args.indir)

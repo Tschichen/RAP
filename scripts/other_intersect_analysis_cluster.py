@@ -1,17 +1,31 @@
+#/usr/bin/env python3
+# other_intersect_analysis_cluster.py ---
+#
+# Filename: other_intersect_analysis_cluster.py 
+# Contents: Analyse peaks from SCRibo-seq experiments that are not ribozymes
+# Description:counts peaks from SCRibo-seq experiments that were intersected with the species genomes annotation. Additional, heights and widths of peaks, and their means and medians are calculated. For further plotting CSV files were generated.
+# Author: Christiane Gaertner
+# Version: 0.1
+# Package-Requires: argparse, os, pathlib, numpy, pandas
+
+
+# CODE
+
+# IMPORTS
 import argparse
 import os
 import pandas as pd
 from pathlib import Path
 import numpy as np
 
-
+# returns path of input directory
 def dir_path(string):
     if os.path.isdir(string):
         return string
     else:
         raise NotADirectoryError(string)
 
-
+# returns path of output directory
 def dir_outpath(string):
     if os.path.isdir(string):
         return string
@@ -21,7 +35,7 @@ def dir_outpath(string):
     Path(dir_path).mkdir()
     return string
 
-
+# count frequenz of peaks of different annotation types
 def count_other(file, position):
     input = file.readlines()
     count_others = {}
@@ -42,7 +56,7 @@ def count_other(file, position):
 
     return count_others
 
-
+# parse heights and lenghts of peaks of different annotation types
 def quantify_other(file, position):
     input = file.readlines()
     cluster_others = {}
@@ -68,7 +82,7 @@ def quantify_other(file, position):
 
     return cluster_others
 
-
+# calculate median and mean heights and lenghts of peaks of different annotation types
 def find_mean_peak_height_to_length(cluster_others_quantify):
     mean_dict = {}
     for other in cluster_others_quantify.keys():
@@ -89,8 +103,8 @@ def find_mean_peak_height_to_length(cluster_others_quantify):
         mean_dict[other_name] = [value, median, mean_length, median_length]
 
     return mean_dict
-    
 
+# MAIN
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="count other in peaks in intersection with off. anno")
     parser.add_argument('-i', '--indir', type=dir_path, required=True, help="directory, where input files are stored")
@@ -168,3 +182,4 @@ if __name__ == "__main__":
                     median_length = mean_median[3]
                     new_line = hit_name + "\t" + str(mean) + "\t" + str(median) + "\t" + str(mean_length) + "\t" + str(median_length) + "\n"
                     out_file.write(new_line)
+# other_intersect_analysis_cluster.py ends here

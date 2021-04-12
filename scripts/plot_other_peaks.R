@@ -1,5 +1,16 @@
 #!/usr/bin/env Rscript
-# Generate bar plot that represents frequence of peaks for single ribozyme types out of Ribozeq experiments
+
+# Filename: plot_other_peaks.R
+# Description: Generate bar plot that represents frequence of peaks for different annotations other than ribozymes out of SCRibo-Seq experiments
+# Author: Christiane Gaertner
+# Version: 0.1
+# Package-Requires: ggplot2
+
+# CODE
+
+# IMPORTS
+
+
 
 library("ggplot2")
 
@@ -33,25 +44,3 @@ plot_ribo_count <- function(data, name, path){
 	}
 
 plot_ribo_count(count_data, name, path)}
-
-if(grepl("other_peaks_quantify_count", csv, fixed=TRUE)){
-  
-  length_height <- read.csv(csv, sep="\t", header=TRUE)
-  
-  length_height$length <- as.numeric(length_height$length)
-  length_height$height <- as.numeric(length_height$height)
-  length_height$ribo <- as.character(length_height$hit)
-  length_height$ribo <- as.factor(length_height$ribo)
-  
-  
-  plot_ribo_length_height <- function(data, name, path){
-  new_path = paste(path, "_length_height.pdf", sep="")
-  
-  x <- ggplot(data, aes(x = length, y=height)) + theme_bw(base_size=32) + geom_violin() + geom_point() +
-    labs(title=name, x='length of peaks', y='peak height') + facet_wrap(~ ribo)
-  
-  ggsave(new_path, x, width = 18, height = 8)}
-  
-  plot_ribo_length_height(length_height, name, path)
-  
-}

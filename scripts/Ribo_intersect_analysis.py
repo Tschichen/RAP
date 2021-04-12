@@ -1,3 +1,15 @@
+#!/usr/bin/env python3
+
+"""
+CONTENTS      : Analyse ribozyme peaks from SCRibo-seq experiments without clustering of ribozyme sequences.
+
+DESCRIPTION   : Peaks are counted, heights and widths of the peaks, and their means and medians were calculated. Results were generated as CSV files.
+
+version: 0.1
+
+@author: Christiane Gaertner
+"""
+
 import argparse
 import os
 import pandas as pd

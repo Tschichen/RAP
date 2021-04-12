@@ -1,4 +1,16 @@
 #!/usr/bin/env Rscript
+
+# Filename: plot_cmsearch_count.R
+# Description: Generates bar plots that show absolute and relative count of hits from cmsearch for each ribo type / CM.
+# Author: Christiane Gaertner
+# Version: 0.1
+# Package-Requires: ggplot2
+
+
+# CODE
+
+# IMPORTS
+
 library("ggplot2")
 
 options(echo=TRUE)

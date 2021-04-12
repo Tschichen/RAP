@@ -1,16 +1,28 @@
+#/usr/bin/env python3
+# other_intersect_analysis.py ---
+
+# Filename: other_intersect_analysis.py
+# Description: Peaks other than ribozymes are counted, heights and widths of the peaks, and their means and medians were calculated. Results were generated as CSV files.
+# Author: Christiane Gaertner
+# Version: 0.1
+# Package-Requires: argparse, os, pathlib, pandas
+
+# CODE
+
+# IMPORTS
 import argparse
 import os
 import pandas as pd
 from pathlib import Path
 
-
+# Returns path of input directory
 def dir_path(string):
     if os.path.isdir(string):
         return string
     else:
         raise NotADirectoryError(string)
 
-
+# Returns path of output directory
 def dir_outpath(string):
     if os.path.isdir(string):
         return string
@@ -20,7 +32,7 @@ def dir_outpath(string):
     Path(dir_path).mkdir()
     return string
 
-
+# Counts hits for every peak
 def count_other(file, position):
     input = file.readlines()
     count_others = {}
@@ -40,7 +52,7 @@ def count_other(file, position):
 
     return count_others
 
-
+# calculates heights and lengths of peaks
 def quantify_other(file, position):
     input = file.readlines()
     cluster_others = {}
@@ -65,7 +77,7 @@ def quantify_other(file, position):
 
     return cluster_others
 
-
+# MAIN
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="count other in peaks in intersection with off. anno")
     parser.add_argument('-i', '--indir', type=dir_path, required=True, help="directory, where input files are stored")
@@ -127,3 +139,4 @@ if __name__ == "__main__":
                             height = str(height_array[i])
                             new_line = hit_name + "\t" + length + "\t" + height + "\n"
                             out_file.write(new_line)
+# other_intersect_analysis.py ends here

@@ -2,14 +2,11 @@
 # cmsarch_count_ribos.py ---
 #
 # Filename: cmsarch_count_ribos.py 
-# Description:
+# Description: counts number, lengths and e-values of hits from cmsearch for each ribozyme type.
 # Author: Christiane Gaertner
-# Created: Mon Nov 16 12:43:10 2020 (+0100)
 # Version: 0.1
 # Package-Requires: argparse, os, pathlib, numpy, pandas
-# Last-Updated: Mon Nov 16 12:43:10 2020 (+0100)
-#           By: Christiane Gaertner
-#     Update #: 1
+
 
 # CODE
 
@@ -20,7 +17,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-# Counting of hitsfor every hit under threshold
+# Counting of hits for every hit under threshold
 def count_ribozymes(input_file, threshold):
     input_lines = input_file.readlines()
     ribo_dict = {}
