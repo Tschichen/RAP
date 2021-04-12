@@ -5,7 +5,7 @@ The scripts provided in this repository can be used to manipulate data from SCRi
 
 ## Quantification of ribozyme annotation sites in species' genomes
 
-After running cmsearch to find ribozyme annotation sites (included in the NextSnakes pipelines), cmsearch output files can be analyzed with *cmsearch_analysis.sh*. the script gives results for single ribozyme types. The bed files for each investigated CM should be copied or linked to one directory.
+After running cmsearch to find ribozyme annotation sites (included in the NextSnakes pipelines), *cmsearch* output files can be analyzed with *cmsearch_analysis.sh*. the script gives results for single ribozyme types. The bed files for each investigated CM should be copied or linked to one directory.
 
 `sh cmsearch_analysis.sh PATHTORIBOBEDFILEDIRECTORY E-VALUETHRESHOLDFORHITS`
 
