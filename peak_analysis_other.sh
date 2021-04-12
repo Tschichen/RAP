@@ -1,9 +1,12 @@
 #!/bin/sh
-# should be executed in the RAP directory after cloning it. Directory with peak_files should be linked to this directory, too, named peaks
-# $1 = path to official annotation
-anno_path=$1
+# This script should be executed in the SCALPEL directory after cloning it. 
+# The peak files should be copied or linked to the peaks directory in this repository.
+# $1 = absolute path to ribozyme or cluster annotation.
+# $2 = absolute path to species genome annotation
+ribo_anno_path=$1
+genome_anno_path=$2
 mkdir intersect_other_anno
-mkdir other_peaks_csv
+mkdir no_intersection
 mkdir plots
 cd peaks
 anno="../"
@@ -12,7 +15,8 @@ for i in *;
 do
 if [[ $i =~ "_peak_sorted" ]]
 then
-bedtools intersect -a $i -b $anno_dir -wa -wb -s > ../intersect_other_anno/${i}_intersect_other.bed
+bedtools intersect -a $i -b $ribo_anno_path -v > ../no_intersection/${i}_no_intersect.bed
+bedtools intersect -a ../no_intersection/${i}_no_intersect.bed -b $genome_anno_ath -wa -wb -s > ../intersect_other_anno/${i}_intersect_other.bed
 fi
 done
 cd ..

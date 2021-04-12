@@ -1,6 +1,7 @@
 #!/bin/sh
-# should be executed in the RAP directory after cloning it. Directory with peak_files should be linked to this directory, too, named peaks
-# $1 = path to ribozyme annotation
+# This script should be executed in the SCALPEL directory after cloning it. 
+# The peak files should be copied or linked to the peaks directory in this repository.
+# $1 = absolute path to ribozyme annotation file
 anno_path=$1
 mkdir intersect_ribo_anno
 mkdir ribo_peaks_csv
