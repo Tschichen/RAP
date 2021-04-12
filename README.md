@@ -17,6 +17,7 @@ To analyze peaks from SCRibo-seq experiments, link or copy peak files from peak 
 Then run the following script:
 
 `sh peak_analysis.sh PATHTORIBOZYMEANNOTATION`
+
 `sh peak_analysis_other.sh PATHTORIBOZYMEANNOTATION PATHTOGENOMEANNOTATION`
 
 Frequenz of either ribozyme or other peaks are saved in several tab-separated csv files. Additionally, visualisations are given in the plots directory. 
